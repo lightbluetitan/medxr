@@ -1,0 +1,47 @@
+Package: MedxR
+Type: Package
+Title: Access Drug Regulatory Data via FDA and Health Canada APIs
+Version: 0.1.0
+Maintainer: Renzo Caceres Rossi <arenzocaceresrossi@gmail.com>
+Description: Provides functions to access drug regulatory data from public RESTful APIs 
+    including the 'FDA Open API' and the 'Health Canada Drug Product Database API', 
+    retrieving real-time or historical information on drug approvals, adverse events, 
+    recalls, and product details. Additionally, the package includes a curated collection 
+    of open datasets focused on drugs, pharmaceuticals, treatments, and clinical studies. 
+    These datasets cover diverse topics such as treatment dosages, pharmacological studies, 
+    placebo effects, drug reactions, misuses of pain relievers, and vaccine effectiveness. 
+    The package supports reproducible research and teaching in pharmacology, medicine, 
+    and healthcare by integrating reliable international APIs and structured datasets 
+    from public, academic, and government sources. 
+    For more information on the APIs, see: 
+    'FDA API' <https://open.fda.gov/apis/> and 
+    'Health Canada API' <https://health-products.canada.ca/api/documentation/dpd-documentation-en.html>.
+License: GPL-3
+Language: en
+URL: https://github.com/lightbluetitan/medxr, https://lightbluetitan.github.io/medxr/
+BugReports: https://github.com/lightbluetitan/medxr/issues
+Encoding: UTF-8
+LazyData: true
+Depends: R (>= 4.1.0)
+Imports:
+    utils,
+    httr,
+    jsonlite,
+    dplyr,
+    memoise
+Suggests:
+    ggplot2,
+    testthat (>= 3.0.0),
+    knitr,
+    rmarkdown
+Authors@R: 
+    person(
+        given = "Renzo",
+        family = "Caceres Rossi",
+        role = c("aut", "cre"),
+        email = "arenzocaceresrossi@gmail.com",
+        comment = c(ORCID = "0009-0005-0744-854X")
+    )
+RoxygenNote: 7.3.2
+Config/testthat/edition: 3
+VignetteBuilder: knitr
