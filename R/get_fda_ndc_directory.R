@@ -62,7 +62,8 @@
 #' \url{https://open.fda.gov/apis/drug/ndc/}
 #'
 #' @examples
-#' if (interactive()) {
+#' \donttest{
+#'   # This function requires an internet connection and downloads data from FDA
 #'   get_fda_ndc_directory("aspirin")
 #'   get_fda_ndc_directory("ibuprofen")
 #' }

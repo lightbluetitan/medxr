@@ -16,7 +16,8 @@ knitr::opts_chunk$set(
   warning = FALSE
 )
 
-options(
+# Save original user options
+old_options <- options(
   width = 150,
   tibble.width = Inf,
   pillar.width = Inf
@@ -172,5 +173,12 @@ In addition to API access functions, `MedxR` offers a curated collection of open
 The `MedxR` package provides a unified interface for accessing real-time drug regulatory data from public APIs and a comprehensive collection of curated pharmaceutical datasets. Offering seamless integration with both the **FDA Open API** and **Health Canada Drug Product Database API**, it enables retrieval of critical information on drug approvals, adverse events, recalls, and product details.
 
 The package serves as an essential resource for researchers, healthcare professionals, and educators in pharmacology, medicine, and healthcare, facilitating evidence-based decision making and reproducible research through reliable international data sources and structured datasets from public, academic, and government repositories.
+
+```{r cleanup, include = FALSE}
+# Restore original user options
+
+options(old_options)
+
+```
 
 <div class="tocify-extend-page" data-unique="tocify-extend-page" style="height: 0;"></div>

@@ -55,7 +55,8 @@ the function returns \code{NULL} with an informative message.
 Requires an internet connection.
 }
 \examples{
-if (interactive()) {
+\donttest{
+  # This function requires an internet connection and downloads data from FDA
   get_fda_drugs_approved("aspirin")
   get_fda_drugs_approved("lipitor")
 }

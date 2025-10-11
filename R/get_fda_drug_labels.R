@@ -24,13 +24,14 @@
 #' \code{/drug/label.json?search=<drug_name>}.
 #'
 #' This includes details such as the product ID, brand name, generic name,
-#' indications and usage, dosage and administration, warnings, adverse reactions,
+#' indications and usage, dosage and administration, warnings,
 #' drug interactions, and other prescribing information from FDA-approved drug labels.
 #'
 #' @param drug_name A character string representing the name of the drug.
 #'
 #' @return A tibble with the following columns:
 #' \itemize{
+#'   \item \code{product_id}: Unique identifier for the product
 #'   \item \code{brand_name}: Brand or trade name of the product
 #'   \item \code{generic_name}: Generic name of the active ingredient
 #'   \item \code{manufacturer}: Name of the manufacturer
@@ -38,7 +39,6 @@
 #'   \item \code{route}: Route of administration
 #'   \item \code{indications}: Approved indications for use
 #'   \item \code{warnings}: Important warnings and precautions
-#'   \item \code{adverse_effects}: Known adverse reactions
 #' }
 #'
 #' @details
@@ -55,7 +55,8 @@
 #' \url{https://open.fda.gov/apis/drug/label/}
 #'
 #' @examples
-#' if (interactive()) {
+#' \donttest{
+#'   # This function requires an internet connection and downloads data from FDA
 #'   get_fda_drug_labels("aspirin")
 #' }
 #'
@@ -103,7 +104,7 @@ get_fda_drug_labels <- function(drug_name) {
 
     df <- dplyr::as_tibble(data$results)
 
-    # Extraer columnas deseadas
+    # Extract desired columns
     product_id <- if ("id" %in% names(df)) df$id else NA_character_
     brand_name <- if ("openfda.brand_name" %in% names(df)) sapply(df$openfda.brand_name, function(x) paste(x, collapse = "; ")) else NA_character_
     generic_name <- if ("openfda.generic_name" %in% names(df)) sapply(df$openfda.generic_name, function(x) paste(x, collapse = "; ")) else NA_character_
@@ -113,16 +114,16 @@ get_fda_drug_labels <- function(drug_name) {
     indications <- if ("indications_and_usage" %in% names(df)) sapply(df$indications_and_usage, function(x) paste(x, collapse = " ")) else NA_character_
     warnings <- if ("warnings" %in% names(df)) sapply(df$warnings, function(x) paste(x, collapse = " ")) else if ("warnings_and_cautions" %in% names(df)) sapply(df$warnings_and_cautions, function(x) paste(x, collapse = " ")) else NA_character_
 
-    # Tibble final con 8 columnas y product_id incluido
+    # Final tibble with 8 columns (removed adverse_effects as it's not provided by API)
     label_data <- dplyr::tibble(
-      product_id,
-      brand_name,
-      generic_name,
-      manufacturer,
-      product_type,
-      route,
-      indications,
-      warnings
+      product_id = product_id,
+      brand_name = brand_name,
+      generic_name = generic_name,
+      manufacturer = manufacturer,
+      product_type = product_type,
+      route = route,
+      indications = indications,
+      warnings = warnings
     )
 
     return(label_data)

@@ -57,7 +57,9 @@
 #' \url{https://health-products.canada.ca/api/documentation/dpd-documentation-en.html}
 #'
 #' @examples
-#' if (interactive()) {
+#' \donttest{
+#'   # This function requires an internet connection and downloads data from Health Canada
+#'
 #'   # Retrieve all products
 #'   get_hc_drug_products()
 #'
@@ -78,7 +80,6 @@
 #' @export
 get_hc_drug_products <- function(name = NULL) {
   base_url <- "https://health-products.canada.ca/api/drug/drugproduct"
-
   # If a name is provided, add query parameter
   if (!is.null(name)) {
     if (!is.character(name) || length(name) != 1) {
@@ -88,48 +89,37 @@ get_hc_drug_products <- function(name = NULL) {
   } else {
     url <- base_url
   }
-
   fetch_data <- memoise::memoise(function(url) {
     Sys.sleep(0.2) # Respect rate limit (max 5 req/sec)
     res <- httr::GET(url)
-
     if (res$status_code == 404) {
       message("No products found matching the search term.")
       return(NULL)
     }
-
     if (res$status_code != 200) {
       message(paste("Error: API request failed with status", res$status_code))
       return(NULL)
     }
-
     json_text <- httr::content(res, "text", encoding = "UTF-8")
     data <- jsonlite::fromJSON(json_text, flatten = TRUE)
-
     if (is.null(data) || length(data) == 0) {
       message("No data returned from Health Canada API.")
       return(NULL)
     }
-
     # Remove unused column if present
     if ("descriptor" %in% names(data)) data$descriptor <- NULL
-
     # Convert to tibble
     df <- dplyr::as_tibble(data)
-
     # Rename DIN column for consistency
     if ("drug_identification_number" %in% names(df)) {
       names(df)[names(df) == "drug_identification_number"] <- "din"
     }
-
     # Optional name filter (case-insensitive)
     if (!is.null(name)) {
       df <- df[grepl(name, df$brand_name, ignore.case = TRUE), ]
     }
-
     return(df)
   })
-
   df <- fetch_data(url)
   return(df)
 }

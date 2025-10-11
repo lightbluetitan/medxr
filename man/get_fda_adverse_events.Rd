@@ -46,7 +46,8 @@ the function returns \code{NULL} with an informative message.
 Requires an internet connection.
 }
 \examples{
-if (interactive()) {
+\donttest{
+  # Esta función requiere conexión a internet y descarga datos de la FDA
   get_fda_adverse_events("aspirin")
 }
 

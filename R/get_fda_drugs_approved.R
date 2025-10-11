@@ -63,7 +63,8 @@
 #' \url{https://open.fda.gov/apis/drug/drugsfda/}
 #'
 #' @examples
-#' if (interactive()) {
+#' \donttest{
+#'   # This function requires an internet connection and downloads data from FDA
 #'   get_fda_drugs_approved("aspirin")
 #'   get_fda_drugs_approved("lipitor")
 #' }

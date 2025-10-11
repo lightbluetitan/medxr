@@ -54,7 +54,8 @@
 #' \url{https://open.fda.gov/apis/drug/event/}
 #'
 #' @examples
-#' if (interactive()) {
+#' \donttest{
+#'   # Esta función requiere conexión a internet y descarga datos de la FDA
 #'   get_fda_adverse_events("aspirin")
 #' }
 #'

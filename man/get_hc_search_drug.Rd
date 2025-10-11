@@ -47,7 +47,8 @@ the function returns \code{NULL} with an informative message.
 Requires an internet connection.
 }
 \examples{
-if (interactive()) {
+\donttest{
+  # This function requires an internet connection and downloads data from Health Canada
   get_hc_search_drug("NEMBUTAL")
 }
 

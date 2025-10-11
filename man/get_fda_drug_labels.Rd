@@ -16,6 +16,7 @@ get_fda_drug_labels(drug_name)
 \value{
 A tibble with the following columns:
 \itemize{
+  \item \code{product_id}: Unique identifier for the product
   \item \code{brand_name}: Brand or trade name of the product
   \item \code{generic_name}: Generic name of the active ingredient
   \item \code{manufacturer}: Name of the manufacturer
@@ -23,7 +24,6 @@ A tibble with the following columns:
   \item \code{route}: Route of administration
   \item \code{indications}: Approved indications for use
   \item \code{warnings}: Important warnings and precautions
-  \item \code{adverse_effects}: Known adverse reactions
 }
 }
 \description{
@@ -32,7 +32,7 @@ that match a specific drug name using the RESTful API endpoint
 \code{/drug/label.json?search=<drug_name>}.
 
 This includes details such as the product ID, brand name, generic name,
-indications and usage, dosage and administration, warnings, adverse reactions,
+indications and usage, dosage and administration, warnings,
 drug interactions, and other prescribing information from FDA-approved drug labels.
 }
 \details{
@@ -47,7 +47,8 @@ the function returns \code{NULL} with an informative message.
 Requires an internet connection.
 }
 \examples{
-if (interactive()) {
+\donttest{
+  # This function requires an internet connection and downloads data from FDA
   get_fda_drug_labels("aspirin")
 }
 

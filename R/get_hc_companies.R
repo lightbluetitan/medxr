@@ -57,7 +57,8 @@
 #' \url{https://health-products.canada.ca/api/documentation/dpd-documentation-en.html}
 #'
 #' @examples
-#' if (interactive()) {
+#' \donttest{
+#'   # This function requires an internet connection and downloads data from Health Canada
 #'   get_hc_companies()
 #' }
 #'
@@ -74,7 +75,6 @@
 #' @export
 get_hc_companies <- function() {
   url <- "https://health-products.canada.ca/api/drug/company"
-
   fetch_data <- memoise::memoise(function(url) {
     Sys.sleep(0.2) # Rate limit (max 5 req/sec)
     res <- httr::GET(url)
@@ -82,23 +82,18 @@ get_hc_companies <- function() {
       message(paste("Error: API request failed with status", res$status_code))
       return(NULL)
     }
-
     json_text <- httr::content(res, "text", encoding = "UTF-8")
     data <- jsonlite::fromJSON(json_text, flatten = TRUE)
-
     if (is.null(data) || length(data) == 0) {
       message("No data returned from Health Canada API.")
       return(NULL)
     }
-
     # Remove unused columns
     data$post_office_box <- NULL
     data$suite_number <- NULL
-
     df <- dplyr::as_tibble(data)
     return(df)
   })
-
   df <- fetch_data(url)
   return(df)
 }
