@@ -1,6 +1,6 @@
 # MedxR
 
-[![License: GPL-3.0](https://img.shields.io/badge/license-GPL--3.0-blue.svg)](LICENSE)
+![License: GPL-3.0](https://img.shields.io/badge/license-GPL--3.0-blue.svg)
 
 The `MedxR` package provides a unified interface to access open drug regulatory data from the **U.S. Food and Drug Administration (FDA) Open API** and the **Health Canada Drug Product Database API**. It allows users to retrieve real-time or historical information about **drug approvals**, **adverse events**, **product recalls**, and **pharmaceutical details**, enabling transparent and reproducible analysis of regulatory information across North America.
 
