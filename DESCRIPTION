@@ -1,7 +1,7 @@
 Package: MedxR
 Type: Package
 Title: Access Drug Regulatory Data via FDA and Health Canada APIs
-Version: 0.1.0
+Version: 0.1.1
 Maintainer: Renzo Caceres Rossi <arenzocaceresrossi@gmail.com>
 Description: Provides functions to access drug regulatory data from public RESTful APIs 
     including the 'FDA Open API' and the 'Health Canada Drug Product Database API', 

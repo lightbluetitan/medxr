@@ -80,44 +80,33 @@ These functions allow users to access high-quality and structured information on
 In the following sections, you’ll find examples on how to work with `MedxR` in practical scenarios, including retrieving data from the **FDA** and **Health Canada** APIs, as well as exploring and analyzing the curated datasets included in the package.
 
 ### Search Adverse Events by Drug Name in FDA Adverse Event Reporting System
-
-```{r fda-adverse-events}
-
-
+```{r fda-adverse-events, eval=FALSE}
 aspirin_adverse_event <- get_fda_adverse_events("aspirin")
 aspirin_adverse_event %>% 
   select(report_id, date_received, country, serious, patient_sex) %>%
   head(6)
-
 ```
 
 
 ### Search FDA-Approved Drugs by Drug Name
-
-```{r fda-approved-drugs}
-
+```{r fda-approved-drugs, eval=FALSE}
 lipitor_drugs_approved <- get_fda_drugs_approved("lipitor")
 lipitor_drugs_approved %>% 
   select(application_number, brand, generic, approval_date, strength, form)
-
 ```
 
 
+
 ### Get a Drug Product by DIN from Health Canada Drug Product Database
-
-```{r health-canada-din}
-
+```{r health-canada-din, eval=FALSE}
 hc_drug_din <- get_hc_drug_by_din("00000213")
 hc_drug_din %>% 
   select(drug_code, class_name, din, brand_name, company_name)
-
 ```
 
 
 ### Top 10 Canadian Companies by Number of Registered Drug Products
-
-```{r health-canada-products-companies, message=FALSE, warning=FALSE, fig.width=10, fig.height=5}
-
+```{r health-canada-products-companies, eval=FALSE, message=FALSE, warning=FALSE, fig.width=10, fig.height=5}
 # Retrieve data from Health Canada APIs
 drug_products <- get_hc_drug_products()
 companies <- get_hc_companies()
@@ -142,7 +131,6 @@ ggplot(merged_data, aes(x = reorder(company_name, total_products), y = total_pro
     caption = "Source: Health Canada Drug Product Database (via MedxR)"
   ) +
   theme_minimal(base_size = 13)
-
 ```
 
 

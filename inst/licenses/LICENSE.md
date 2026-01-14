@@ -28,4 +28,4 @@ The `MedxR` package, including all its data files (.rda) and code files, is lice
 
 ## Copyright Notice
 
-© 2025 Renzo Caceres Rossi. All rights reserved under the GPL-3.
+© 2026 Renzo Caceres Rossi. All rights reserved under the GPL-3.

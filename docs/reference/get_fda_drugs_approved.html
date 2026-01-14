@@ -19,7 +19,7 @@ by the FDA since 1939."><meta property="og:image" content="https://lightbluetita
 
     <a class="navbar-brand me-2" href="../index.html">MedxR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,6 +32,7 @@ by the FDA since 1939."><meta property="og:image" content="https://lightbluetita
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/MedxR_vignette.html">MedxR: Access Drug Regulatory Data via FDA and Health Canada APIs</a></li>
   </ul></li>
+<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
 <li class="nav-item"><a class="external-link nav-link" href="https://github.com/lightbluetitan/medxr/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
@@ -113,10 +114,39 @@ the function returns <code>NULL</code> with an informative message.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+<span class="r-in"><span>  <span class="co"># This function requires an internet connection and downloads data from FDA</span></span></span>
 <span class="r-in"><span>  <span class="fu">get_fda_drugs_approved</span><span class="op">(</span><span class="st">"aspirin"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 16 × 9</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    application_number sponsor   brand generic type  approval_date strength form </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> ANDA214039         GRANULES  ACET… ACETAM… ANDA  2021-02-23    250MG; … TABL…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> ANDA074951         STEVENS J BUTA… ASPIRI… ANDA  1998-08-31    325MG; … CAPS…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> ANDA207944         PH HEALTH ASPI… ASPIRI… ANDA  2017-01-18    25MG; 2… CAPS…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> ANDA209048         DR REDDYS ASPI… ASPIRI… ANDA  2018-10-10    25MG; 2… CAPS…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> ANDA205230         LGM PHAR… BUTA… ASPIRI… ANDA  2021-10-18    500MG; … CAPS…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> ANDA206392         AMNEAL P… ASPI… ASPIRI… ANDA  2016-03-08    25MG; 2… CAPS…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> ANDA078149         MPP PHAR… BUTA… ASPIRI… ANDA  2007-06-13    325MG; … CAPS…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> ANDA075141         GALT PHA… ORPH… ASPIRI… ANDA  1998-05-29    385MG; … TABL…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> ANDA075141         GALT PHA… ORPH… ASPIRI… ANDA  1998-05-29    770MG; … TABL…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> ANDA209929         MICRO LA… ASPI… ASPIRI… ANDA  2021-08-11    25MG; 2… CAPS…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> NDA020802          HALEON U… EXCE… ACETAM… NDA   1998-01-14    250MG; … TABL…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> ANDA086996         SANDOZ    LANO… ASPIRI… ANDA  1981-12-28    325MG; … CAPS…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> ANDA211695         AUROBIND… ACET… ACETAM… ANDA  2022-02-02    250MG; … TABL…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span> ANDA075794         PERRIGO   ACET… ACETAM… ANDA  2001-11-26    250MG; … TABL…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">15</span> ANDA075231         LGM PHAR… BUTA… ASPIRI… ANDA  2001-11-30    325MG; … CAPS…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">16</span> ANDA040910         EPIC PHA… OXYC… ASPIRI… ANDA  2020-07-16    325MG; … TABL…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1 more variable: route &lt;chr&gt;</span></span>
 <span class="r-in"><span>  <span class="fu">get_fda_drugs_approved</span><span class="op">(</span><span class="st">"lipitor"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 4 × 9</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   application_number sponsor brand   generic  type  approval_date strength form </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> NDA020702          UPJOHN  LIPITOR ATORVAS… NDA   1996-12-17    EQ 80MG… TABL…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> NDA020702          UPJOHN  LIPITOR ATORVAS… NDA   1996-12-17    EQ 20MG… TABL…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> NDA020702          UPJOHN  LIPITOR ATORVAS… NDA   1996-12-17    EQ 40MG… TABL…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> NDA020702          UPJOHN  LIPITOR ATORVAS… NDA   1996-12-17    EQ 10MG… TABL…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1 more variable: route &lt;chr&gt;</span></span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

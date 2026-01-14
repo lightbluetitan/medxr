@@ -1,6 +1,6 @@
 # MedxR - Access Drug Regulatory Data via FDA and Health Canada APIs
-# Version 0.1.0
-# Copyright (C) 2025 Renzo Caceres Rossi
+# Version 0.1.1
+# Copyright (C) 2026 Renzo Caceres Rossi
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by

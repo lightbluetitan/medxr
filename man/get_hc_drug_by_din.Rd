@@ -26,6 +26,7 @@ A tibble with the following columns:
   \item \code{company_name}: Manufacturer name
   \item \code{last_update_date}: Date of last update in the database
 }
+Returns \code{NULL} if the resource is unavailable or if an error occurs.
 }
 \description{
 Retrieves detailed information for a specific drug product listed in the
@@ -43,6 +44,9 @@ rate limit between successive API requests.
 
 If the DIN does not exist or the API returns an error, the function
 returns \code{NULL} with an informative message.
+
+The function fails gracefully when internet resources are unavailable,
+including SSL certificate errors, network timeouts, or server issues.
 }
 \note{
 Requires an internet connection.
@@ -50,7 +54,10 @@ Requires an internet connection.
 \examples{
 \donttest{
   # This function requires an internet connection and downloads data from Health Canada
-  get_hc_drug_by_din("02456789")
+  result <- get_hc_drug_by_din("02456789")
+  if (!is.null(result)) {
+    print(result)
+  }
 }
 
 }

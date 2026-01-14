@@ -3,12 +3,12 @@
 that match a specific drug name using the RESTful API endpoint
 /drug/label.json?search=&amp;lt;drug_name&amp;gt;.
 This includes details such as the product ID, brand name, generic name,
-indications and usage, dosage and administration, warnings, adverse reactions,
+indications and usage, dosage and administration, warnings,
 drug interactions, and other prescribing information from FDA-approved drug labels."><meta property="og:description" content="Retrieves drug label information from the FDA Drug Labeling Database
 that match a specific drug name using the RESTful API endpoint
 /drug/label.json?search=&amp;lt;drug_name&amp;gt;.
 This includes details such as the product ID, brand name, generic name,
-indications and usage, dosage and administration, warnings, adverse reactions,
+indications and usage, dosage and administration, warnings,
 drug interactions, and other prescribing information from FDA-approved drug labels."><meta property="og:image" content="https://lightbluetitan.github.io/medxr/logo.png"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
@@ -17,7 +17,7 @@ drug interactions, and other prescribing information from FDA-approved drug labe
 
     <a class="navbar-brand me-2" href="../index.html">MedxR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,6 +30,7 @@ drug interactions, and other prescribing information from FDA-approved drug labe
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/MedxR_vignette.html">MedxR: Access Drug Regulatory Data via FDA and Health Canada APIs</a></li>
   </ul></li>
+<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
 <li class="nav-item"><a class="external-link nav-link" href="https://github.com/lightbluetitan/medxr/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
@@ -50,7 +51,7 @@ drug interactions, and other prescribing information from FDA-approved drug labe
 that match a specific drug name using the RESTful API endpoint
 <code>/drug/label.json?search=&lt;drug_name&gt;</code>.</p>
 <p>This includes details such as the product ID, brand name, generic name,
-indications and usage, dosage and administration, warnings, adverse reactions,
+indications and usage, dosage and administration, warnings,
 drug interactions, and other prescribing information from FDA-approved drug labels.</p>
     </div>
 
@@ -74,14 +75,14 @@ drug interactions, and other prescribing information from FDA-approved drug labe
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A tibble with the following columns:</p><ul><li><p><code>brand_name</code>: Brand or trade name of the product</p></li>
+    <p>A tibble with the following columns:</p><ul><li><p><code>product_id</code>: Unique identifier for the product</p></li>
+<li><p><code>brand_name</code>: Brand or trade name of the product</p></li>
 <li><p><code>generic_name</code>: Generic name of the active ingredient</p></li>
 <li><p><code>manufacturer</code>: Name of the manufacturer</p></li>
 <li><p><code>product_type</code>: Type of drug product</p></li>
 <li><p><code>route</code>: Route of administration</p></li>
 <li><p><code>indications</code>: Approved indications for use</p></li>
 <li><p><code>warnings</code>: Important warnings and precautions</p></li>
-<li><p><code>adverse_effects</code>: Known adverse reactions</p></li>
 </ul></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -104,9 +105,25 @@ the function returns <code>NULL</code> with an informative message.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+<span class="r-in"><span>  <span class="co"># This function requires an internet connection and downloads data from FDA</span></span></span>
 <span class="r-in"><span>  <span class="fu">get_fda_drug_labels</span><span class="op">(</span><span class="st">"aspirin"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 100 × 8</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    product_id            brand_name generic_name manufacturer product_type route</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 008ee85b-5cac-45a6-a… Low Dose … ASPIRIN      P &amp; L Devel… HUMAN OTC D… ORAL </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 39ea5b3c-510d-adb0-e… Rapidol A… ASPIRIN      Pharmadel L… HUMAN OTC D… ORAL </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 385229c2-9b6a-56ca-e… Aspirin L… ASPIRIN      ATLANTIC BI… HUMAN OTC D… ORAL </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 285f424d-b50c-c734-e… HEB Effer… ASPIRIN      H. E. BUTT … HUMAN OTC D… ORAL </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 249d869c-d17e-ebcb-e… Enteric C… ASPIRIN      DISCOUNT DR… HUMAN OTC D… ORAL </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> c8032d71-2485-4ab4-a… Aspirin E… ASPIRIN 81 … Lodaat LLC   HUMAN OTC D… ORAL </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 2969de2e-dde5-8daa-e… Extra Str… ACETAMINOPH… Lil' Drug S… HUMAN OTC D… ORAL </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 3e4cb995-be20-a159-e… Medique A… ACETAMINOPH… Unifirst Fi… HUMAN OTC D… ORAL </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 45b0b233-b206-0519-e… Aspirin 8… ASPIRIN      VALU MERCHA… HUMAN OTC D… ORAL </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 45b30e56-4555-140e-e… Aspirin    ASPIRIN      VALU MERCHA… HUMAN OTC D… ORAL </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 90 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 2 more variables: indications &lt;chr&gt;, warnings &lt;chr&gt;</span></span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

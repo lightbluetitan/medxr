@@ -19,7 +19,7 @@ marketed in the United States."><meta property="og:image" content="https://light
 
     <a class="navbar-brand me-2" href="../index.html">MedxR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,6 +32,7 @@ marketed in the United States."><meta property="og:image" content="https://light
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/MedxR_vignette.html">MedxR: Access Drug Regulatory Data via FDA and Health Canada APIs</a></li>
   </ul></li>
+<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
 <li class="nav-item"><a class="external-link nav-link" href="https://github.com/lightbluetitan/medxr/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
@@ -112,10 +113,39 @@ the function returns <code>NULL</code> with an informative message.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+<span class="r-in"><span>  <span class="co"># This function requires an internet connection and downloads data from FDA</span></span></span>
 <span class="r-in"><span>  <span class="fu">get_fda_ndc_directory</span><span class="op">(</span><span class="st">"aspirin"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 100 × 9</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    ndc        brand         generic ingredients form  route labeler type  status</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 68210-1013 <span style="color: #BB0000;">NA</span>            ACETAM… ACETAMINOP… TABL… <span style="color: #BB0000;">NA</span>    Spirit… DRUG… DRUG …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 11673-493  Chewable Low… Aspirin ASPIRIN (8… TABL… ORAL  TARGET… HUMA… OTC M…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 63941-105  Low Dose Che… ASPIRIN ASPIRIN (8… TABL… ORAL  VALU M… HUMA… OTC M…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 59779-945  ASPIRIN Low … Aspirin ASPIRIN (8… TABL… ORAL  CVS Ph… HUMA… OTC M…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 63868-228  Quality Choi… Aspiri… ASPIRIN (3… TABL… ORAL  Chain … HUMA… OTC M…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 68210-1015 <span style="color: #BB0000;">NA</span>            ASPIRIN ASPIRIN (8… TABL… <span style="color: #BB0000;">NA</span>    SPIRIT… DRUG… DRUG …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 0113-0467  good sense a… Aspirin ASPIRIN (8… TABL… ORAL  L. Per… HUMA… OTC M…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 56062-305  PUBLIX SUPER… ACETAM… ACETAMINOP… TABL… ORAL  PUBLIX… HUMA… ANDA  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 63868-229  Quality Choi… Aspiri… ANHYDROUS … TABL… ORAL  Chain … HUMA… OTC M…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 72036-018  ASPIRIN       ASPIRIN ASPIRIN (3… TABL… ORAL  HARRIS… HUMA… OTC M…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 90 more rows</span></span>
 <span class="r-in"><span>  <span class="fu">get_fda_ndc_directory</span><span class="op">(</span><span class="st">"ibuprofen"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 100 × 9</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    ndc        brand         generic ingredients form  route labeler type  status</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 85766-044  good sense d… Acetam… ACETAMINOP… TABL… ORAL  Sportp… HUMA… ANDA  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 59651-890  <span style="color: #BB0000;">NA</span>            IBUPRO… IBUPROFEN … CAPS… <span style="color: #BB0000;">NA</span>    Aurobi… DRUG… DRUG …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 21130-818  Signature Ca… Ibupro… IBUPROFEN … TABL… ORAL  Safeway HUMA… ANDA  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 50090-7053 good sense i… Ibupro… IBUPROFEN … TABL… ORAL  A-S Me… HUMA… ANDA  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 55910-647  dg health ib… Ibupro… IBUPROFEN … TABL… ORAL  Dolgen… HUMA… ANDA  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 62207-365  Ibuprofen     Ibupro… IBUPROFEN … TABL… ORAL  Granul… HUMA… ANDA  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 60760-929  Ibuprofen     Ibupro… IBUPROFEN … TABL… ORAL  ST. MA… HUMA… ANDA  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 63981-517  kirkland sig… Ibupro… IBUPROFEN … TABL… ORAL  Costco… HUMA… ANDA  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 76281-119  Childrens Ib… IBUPRO… IBUPROFEN … SUSP… ORAL  AptaPh… HUMA… ANDA  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 68998-012  Ibuprofen     Ibupro… IBUPROFEN … TABL… ORAL  MARC G… HUMA… ANDA  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 90 more rows</span></span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

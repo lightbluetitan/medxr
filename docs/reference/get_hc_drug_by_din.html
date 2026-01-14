@@ -17,7 +17,7 @@ and update date."><meta property="og:image" content="https://lightbluetitan.gith
 
     <a class="navbar-brand me-2" href="../index.html">MedxR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,6 +30,7 @@ and update date."><meta property="og:image" content="https://lightbluetitan.gith
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/MedxR_vignette.html">MedxR: Access Drug Regulatory Data via FDA and Health Canada APIs</a></li>
   </ul></li>
+<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
 <li class="nav-item"><a class="external-link nav-link" href="https://github.com/lightbluetitan/medxr/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
@@ -83,7 +84,8 @@ of the product to retrieve.</p></dd>
 <li><p><code>ai_group_no</code>: Active ingredient group number</p></li>
 <li><p><code>company_name</code>: Manufacturer name</p></li>
 <li><p><code>last_update_date</code>: Date of last update in the database</p></li>
-</ul></div>
+</ul><p>Returns <code>NULL</code> if the resource is unavailable or if an error occurs.</p>
+    </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>Sends a GET request to the Health Canada Drug Product Database API.
@@ -91,6 +93,8 @@ Supports caching via the <span class="pkg">memoise</span> package and enforces a
 rate limit between successive API requests.</p>
 <p>If the DIN does not exist or the API returns an error, the function
 returns <code>NULL</code> with an informative message.</p>
+<p>The function fails gracefully when internet resources are unavailable,
+including SSL certificate errors, network timeouts, or server issues.</p>
     </div>
     <div class="section level2">
     <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
@@ -105,9 +109,14 @@ returns <code>NULL</code> with an informative message.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>  <span class="fu">get_hc_drug_by_din</span><span class="op">(</span><span class="st">"02456789"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+<span class="r-in"><span>  <span class="co"># This function requires an internet connection and downloads data from Health Canada</span></span></span>
+<span class="r-in"><span>  <span class="va">result</span> <span class="op">&lt;-</span> <span class="fu">get_hc_drug_by_din</span><span class="op">(</span><span class="st">"02456789"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> No data returned from Health Canada API for DIN 02456789</span>
+<span class="r-in"><span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">}</span></span></span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
